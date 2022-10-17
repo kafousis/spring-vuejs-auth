@@ -38,6 +38,12 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
+bootRun { }
+
+bootWar {
+	archiveFileName = 'spring-vuejs-prototype.war'
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
