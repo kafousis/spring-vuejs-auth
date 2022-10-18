@@ -1,3 +1,5 @@
 rootProject.name = 'spring-vuejs-prototype'
 include 'prototype-backend'
 include 'prototype-frontend'
+include 'prototype-frontend'
+

@@ -2,13 +2,11 @@ plugins {
 	id 'org.springframework.boot' version '2.7.4'
 	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
 //	id 'org.flywaydb.flyway' version '9.4.0' // enables use from command line
-//	id 'java'
-	id 'war'
+	id 'war' // extends the Java plugin
 }
 
 group = 'com.github.kafousis'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -30,17 +28,34 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-security:1.6.11'
 	implementation 'org.flywaydb:flyway-core:9.4.0' // migrate on application startup
 	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 //	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
+	runtimeOnly project(':prototype-frontend')
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
+java {
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
+}
+
+clean {
+	doFirst {
+		delete "$buildDir/"
+		delete project(':prototype-frontend').file('dist/').getAbsolutePath()
+		delete rootProject.file('build/').getAbsolutePath()
+	}
+}
+
 bootRun { }
 
 bootWar {
+	dependsOn ':prototype-frontend:npm_run_build'
+	webAppDirName = project(':prototype-frontend').file('dist/')
+	destinationDirectory = rootProject.file('build/')
 	archiveFileName = 'spring-vuejs-prototype.war'
 }
 
