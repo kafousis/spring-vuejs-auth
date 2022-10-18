@@ -53,8 +53,13 @@ clean {
 bootRun { }
 
 bootWar {
+	// npm_run_build makes production build in 'prototype-frontend/dist'
 	dependsOn ':prototype-frontend:npm_run_build'
+
+	// contents of 'webAppDirName' are copied to WAR root folder
 	webAppDirName = project(':prototype-frontend').file('dist/')
+
+	// result WAR file
 	destinationDirectory = rootProject.file('build/')
 	archiveFileName = 'spring-vuejs-prototype.war'
 }
