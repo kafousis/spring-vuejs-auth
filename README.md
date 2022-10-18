@@ -5,6 +5,8 @@ A prototype, implemented with Spring Boot and Vue.js.
 - Spring backend
 - Vue.js frontend
 
+> The frontend was built with Node v16.18.0 and Vue CLI v5.0.8.
+>
 ### Backend
 ```shell
 ./gradlew bootRun
