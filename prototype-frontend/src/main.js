@@ -1,4 +1,23 @@
+// https://www.primefaces.org/primevue/setup
+import 'primevue/resources/themes/nova-vue/theme.css'   //theme
+import 'primevue/resources/primevue.min.css'            //core css
+import 'primeicons/primeicons.css'                      //icons
+import 'primeflex/primeflex.css';                       //primeflex
+
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
+import store from './store'
 
-createApp(App).mount('#app')
+import PrimeVue from 'primevue/config';
+
+const app = createApp(App);
+
+app.use(router);
+app.use(store);
+
+// ripple is an optional animation for the supported components
+// Outlined & Filled Input Styles, add {inputStyle: 'filled'}
+app.use(PrimeVue, { ripple: true });
+
+app.mount('#app');

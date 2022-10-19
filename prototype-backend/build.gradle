@@ -53,7 +53,7 @@ clean {
 bootRun { }
 
 bootWar {
-	// npm_run_build makes production build in 'prototype-frontend/dist'
+	// creates a build directory with a production build
 	dependsOn ':prototype-frontend:npm_run_build'
 
 	// contents of 'webAppDirName' are copied to WAR root folder
