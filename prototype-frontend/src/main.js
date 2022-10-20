@@ -4,6 +4,10 @@ import 'primevue/resources/primevue.min.css'            //core css
 import 'primeicons/primeicons.css'                      //icons
 import 'primeflex/primeflex.css';                       //primeflex
 
+// additional css from template
+import './assets/styles/layout.scss';
+//import './assets/demo/flags/flags.css';
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

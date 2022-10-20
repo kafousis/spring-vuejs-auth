@@ -1,30 +1,44 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+	<div :class="containerClass">
+		<div class="layout-main-container">
+			<div class="layout-main">
+				<router-view />
+			</div>
+			<AppFooter />
+		</div>
+	</div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import AppFooter from './components/AppFooter.vue';
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default {
+	components: {
+		'AppFooter': AppFooter,
+	},
+	data() {
+		return {
+			// the values of these variables define
+			// what css classes are applied to main div
+			// defines responsive behavior
+			layoutMode: "static", // values: static, overlay
+			staticMenuInactive: true,
+			overlayMenuActive: false,
+			mobileMenuActive: false,
+		};
+	},
+	computed: {
+		containerClass() {
+			return ["layout-wrapper", {
+				"layout-overlay": this.layoutMode === "overlay",
+				"layout-static": this.layoutMode === "static",
+				"layout-static-sidebar-inactive": this.staticMenuInactive && this.layoutMode === "static",
+				"layout-overlay-sidebar-active": this.overlayMenuActive && this.layoutMode === "overlay",
+				"layout-mobile-sidebar-active": this.mobileMenuActive,
+				"p-input-filled": this.$primevue.config.inputStyle === "filled",
+				"p-ripple-disabled": this.$primevue.config.ripple === false,
+			}];
+		},
+	},
+};
+</script>
