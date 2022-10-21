@@ -6,7 +6,6 @@ import 'primeflex/primeflex.css';                       //primeflex
 
 // additional css from template
 import './assets/styles/layout.scss';
-//import './assets/demo/flags/flags.css';
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -14,6 +13,9 @@ import router from './router'
 import store from './store'
 
 import PrimeVue from 'primevue/config';
+import InputText from 'primevue/inputtext';
+import Checkbox from 'primevue/checkbox';
+import Button from 'primevue/button';
 
 const app = createApp(App);
 
@@ -23,5 +25,9 @@ app.use(store);
 // ripple is an optional animation for the supported components
 // Outlined & Filled Input Styles, add {inputStyle: 'filled'}
 app.use(PrimeVue, { ripple: true });
+
+app.component('InputText', InputText);
+app.component('Checkbox', Checkbox);
+app.component('Button', Button);
 
 app.mount('#app');
