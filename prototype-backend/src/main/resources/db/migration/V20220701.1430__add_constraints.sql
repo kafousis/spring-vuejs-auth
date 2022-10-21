@@ -12,6 +12,9 @@ alter table users
 alter table users
    add constraint UNQ_user_email unique (email);
 
+alter table users
+  add constraint UNQ_user_phone unique (phone);
+
 -- FOREIGN KEYS
 
 alter table roles_privileges

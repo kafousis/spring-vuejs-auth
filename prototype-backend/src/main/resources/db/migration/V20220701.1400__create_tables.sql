@@ -25,6 +25,8 @@ create table users (
     first_name varchar(255) not null,
     last_name varchar(255) not null,
     email varchar(255) not null,
+    phone varchar(255) not null,
+    image varchar(255) not null,
     enabled boolean not null,
     role_id bigserial not null,
     created_at timestamp not null,
