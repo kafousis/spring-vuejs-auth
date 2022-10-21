@@ -16,6 +16,7 @@ import PrimeVue from 'primevue/config';
 import InputText from 'primevue/inputtext';
 import Checkbox from 'primevue/checkbox';
 import Button from 'primevue/button';
+import Message from 'primevue/message';
 
 const app = createApp(App);
 
@@ -29,5 +30,6 @@ app.use(PrimeVue, { ripple: true });
 app.component('InputText', InputText);
 app.component('Checkbox', Checkbox);
 app.component('Button', Button);
+app.component('Message', Message);
 
 app.mount('#app');
