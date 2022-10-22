@@ -31,9 +31,6 @@ public class SecurityConfig {
     // picks up userDetailsService and passwordEncoder automatically
     // as long as they are registered as Beans
 
-//    @Autowired
-//    private UserRepository userRepository;
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -52,7 +49,25 @@ public class SecurityConfig {
                 // Spring Security disables rendering within an iframe because it can cause security issues
                 // H2 console runs within a frame so while Spring security is enabled,
                 // frame options has to be disabled explicitly, in order to get the H2 console working
-                .headers().frameOptions().disable();
+                .headers().frameOptions().disable()
+
+                .and()
+
+                .authorizeRequests()
+                    .antMatchers(AUTH_WHITELIST).permitAll()
+                    .antMatchers("/login*").permitAll()
+                .anyRequest().authenticated()
+
+                .and()
+
+                .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/authenticate")
+
+                .and()
+
+                .logout()
+                    .deleteCookies("JSESSIONID");
 
         return http.build();
     }
