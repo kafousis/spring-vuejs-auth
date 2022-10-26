@@ -10,10 +10,10 @@
 
 		<div>
 			<label for="username" class="block text-900 font-medium mb-2">Username</label>
-			<InputText id="username" type="text" class="w-full mb-3" v-model="username" required autofocus />
+			<InputText id="username" name="username" type="text" class="w-full mb-3" v-model="username" required autofocus />
 
 			<label for="password" class="block text-900 font-medium mb-2">Password</label>
-			<InputText id="password" type="password" class="w-full mb-3" v-model="password" required/>
+			<InputText id="password" name="password" type="password" class="w-full mb-3" v-model="password" required/>
 
 			<div class="flex align-items-center justify-content-between mb-6">
 				<div class="flex align-items-center">
@@ -23,14 +23,24 @@
 				<a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
 			</div>
 
-			<Button label="Sign In" icon="pi pi-user" class="w-full"></Button>
+			<Button label="Sign In" icon="pi pi-user" class="w-full" @click="$store.dispatch('auth/login')"></Button>
 		</div>
 	</div>
 </div>
 </template>
 
 <script>
+import AuthService from '../services/auth.service';
+
 export default {
+	mounted() {
+		AuthService.getCsrfToken()
+			.then(response => {
+				console.log('Initial csrf token: ' + response.data.token);
+			}, error => {
+				console.log(error);
+			});
+	},
 	computed: {
 		username: {
 			get() {

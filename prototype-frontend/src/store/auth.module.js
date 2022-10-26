@@ -1,3 +1,5 @@
+import AuthService from '../services/auth.service';
+
 const auth = {
 
 	namespaced: true,
@@ -30,6 +32,14 @@ const auth = {
         updateRememeberMe(state, rememberMe) {
             //console.log("updateRememeberMe")
             state.rememberMe = rememberMe
+        },
+        loginSuccess(state) {
+            console.log("loginSuccess")
+            state.errorMessage = "";
+        },
+        loginFailure(state, errorMessage) {
+            console.log("loginFailure")
+            state.errorMessage = errorMessage;
         }
     },
 
@@ -37,6 +47,20 @@ const auth = {
     // receive a context object which contains mutations, state, getters, actions
     // dispach an action
     actions: {
+        login({ state, commit }) {
+            console.log("action -> login")
+
+            AuthService.formLogin({
+                username: state.username,
+                password: state.password
+            })
+                .then(response => {
+                    console.log(response);
+                    //dispatch('getAuthUser', state.username)
+                }, error => {
+                    commit("loginFailure", error);
+                });
+        },
     }
 }
 

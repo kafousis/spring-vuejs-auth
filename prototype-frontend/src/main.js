@@ -11,6 +11,13 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:8080';
+
+// indicates whether or not requests should be made using credentials 
+// such as cookies, authorization headers or TLS client certificates
+axios.defaults.withCredentials = true;
 
 import PrimeVue from 'primevue/config';
 import InputText from 'primevue/inputtext';

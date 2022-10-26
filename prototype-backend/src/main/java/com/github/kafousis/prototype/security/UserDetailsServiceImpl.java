@@ -28,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional<User> userByUsername = userRepository.findByUsernameJoinFetch(username);
 
         if (userByUsername.isPresent()){
+            log.info("Found user " + userByUsername.get().getUsername());
             return new UserDetailsImpl(userByUsername.get());
         }else{
             log.error("Username not found in the database");
