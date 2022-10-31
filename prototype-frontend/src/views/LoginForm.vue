@@ -9,11 +9,17 @@
 		<Message severity="error" :closable="false" v-if="errorMessage">{{errorMessage}}</Message>
 
 		<div>
-			<label for="username" class="block text-900 font-medium mb-2">Username</label>
-			<InputText id="username" name="username" type="text" class="w-full mb-3" v-model="username" required autofocus />
+			<div class="mb-3">
+				<label for="username" class="block text-900 font-medium mb-2">Username</label>
+				<InputText id="username" name="username" type="text" class="w-full mb-1" v-model="username" :class="{ 'p-invalid': v$.username.$error }" autofocus />
+				<small id="username-error" class="p-error" v-if="v$.username.$error">{{ v$.username.$errors[0].$message }}</small>
+			</div>
 
-			<label for="password" class="block text-900 font-medium mb-2">Password</label>
-			<InputText id="password" name="password" type="password" class="w-full mb-3" v-model="password" required/>
+			<div class="mb-3">
+				<label for="password" class="block text-900 font-medium mb-2">Password</label>
+				<InputText id="password" name="password" type="password" class="w-full mb-1" v-model="password" :class="{'p-invalid': v$.password.$error}" />
+				<small id="password-error" class="p-error" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</small>
+			</div>
 
 			<div class="flex align-items-center justify-content-between mb-6">
 				<div class="flex align-items-center">
@@ -23,7 +29,7 @@
 				<a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
 			</div>
 
-			<Button label="Sign In" icon="pi pi-user" class="w-full" @click="$store.dispatch('auth/login')"></Button>
+			<Button label="Sign In" icon="pi pi-user" class="w-full" @click="validate()"></Button>
 		</div>
 	</div>
 </div>
@@ -31,8 +37,30 @@
 
 <script>
 import AuthService from '../services/auth.service';
+import useVuelidate from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 
 export default {
+	data () {
+		return { 
+			v$: useVuelidate() 
+		}
+	},
+	methods: {
+		validate() {
+			this.v$.$validate();
+			if (!this.v$.$error) {
+				//console.log("form validation successful");
+				this.$store.dispatch('auth/sessionLogin')
+			}
+		}
+	},
+	validations() {
+		return {
+			username: { required },
+			password: { required }
+		}
+	},
 	mounted() {
 		AuthService.getCsrfToken()
 			.then(response => {

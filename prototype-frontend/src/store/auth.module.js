@@ -40,6 +40,9 @@ const auth = {
         loginFailure(state, errorMessage) {
             console.log("loginFailure")
             state.errorMessage = errorMessage;
+        },
+        updateUser(state, user) {
+            state.user = user
         }
     },
 
@@ -47,19 +50,32 @@ const auth = {
     // receive a context object which contains mutations, state, getters, actions
     // dispach an action
     actions: {
-        login({ state, commit }) {
-            console.log("action -> login")
+        sessionLogin({ state, commit, dispatch }) {
+            console.log("sessionLogin")
 
-            AuthService.formLogin({
+            AuthService.sessionLogin({
                 username: state.username,
                 password: state.password
             })
-                .then(response => {
-                    console.log(response);
-                    //dispatch('getAuthUser', state.username)
+                .then( ()=> {
+                    console.log('login successful')
+                    dispatch('getAuthenticatedUser', state.username)
                 }, error => {
-                    commit("loginFailure", error);
+                    commit("loginFailure", error)
                 });
+        },
+        getAuthenticatedUser({ commit }, username) {
+            console.log("getAuthenticatedUser")
+            
+            AuthService.getAuthenticatedUser(username)
+                .then(response => {
+                    console.log(response.data)
+                    commit("updateUser", response.data)
+                    commit('loginSuccess');
+                }, error => {
+                    commit("loginFailure", error)
+
+                })
         },
     }
 }

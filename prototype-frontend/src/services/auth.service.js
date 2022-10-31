@@ -2,25 +2,20 @@ import axios from 'axios';
 
 class AuthService {
 
-    hello() { return axios.get('hello') }
+    getCsrfToken(){ return axios.get('csrf/token'); }
 
-    jwtLogin(creds) { return axios.post('login', creds) }
-
-    formLogin(creds) {
-
+    sessionLogin(creds) {
         var bodyFormData = new FormData();
         bodyFormData.append('username', creds.username);
         bodyFormData.append('password', creds.password);
 
         const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-        return axios.post('login', bodyFormData, headers)
+        return axios.post('authenticate', bodyFormData, headers)
     }
 
-    getCsrfToken(){
-        return axios.get('csrf/token');
-    }
+    jwtTokenLogin(creds) { return axios.post('login', creds) }
 
-    //getAuthUser(username) { return axios.get('api/users/username=' + username) }
+    getAuthenticatedUser(username) { return axios.get('api/users/username=' + username) }
 }
 
 export default new AuthService();
