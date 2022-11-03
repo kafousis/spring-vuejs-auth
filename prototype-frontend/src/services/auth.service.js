@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class AuthService {
 
-    getCsrfToken(){ return axios.get('csrf/token'); }
+    getCsrfToken() { return axios.get('csrf/token'); }
 
     sessionLogin(creds) {
         var bodyFormData = new FormData();
@@ -15,7 +15,8 @@ class AuthService {
 
     jwtTokenLogin(creds) { return axios.post('login', creds) }
 
-    getAuthenticatedUser(username) { return axios.get('api/users/username=' + username) }
+    getAuthenticatedUser() { return axios.get('api/me') }
+
 }
 
 export default new AuthService();

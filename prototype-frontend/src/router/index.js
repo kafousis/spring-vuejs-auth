@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginForm from '../views/LoginForm.vue';
 import Dashboard from '../views/Dashboard.vue'
+import store from '../store'
 
 const routes = [
 	{
@@ -46,7 +47,7 @@ router.beforeEach((to, from, next) => {
     // console.log(to);
     // console.log(from);
 
-    const authenticated = false; // TODO
+    var authenticated = store.getters['auth/isAuthenticated']
 
     if (to.matched.some(record => record.meta.requiresAuth)) {
 

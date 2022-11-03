@@ -1,8 +1,10 @@
 package com.github.kafousis.prototype.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.github.kafousis.prototype.enums.PrivilegeCategory;
 import lombok.*;
 import lombok.experimental.Accessors;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,6 +27,10 @@ public class Privilege {
     @Enumerated(EnumType.STRING)
     private PrivilegeCategory category;
 
+    // @EqualsAndHashCode.Exclude prevents 'collection evicted' when fetching
+    // @JsonBackReference marks the field as non-serializable
+
+    @JsonBackReference
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "privileges")
     private Set<Role> roles = new HashSet<>();

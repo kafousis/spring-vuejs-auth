@@ -1,7 +1,9 @@
 package com.github.kafousis.prototype.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import lombok.experimental.Accessors;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -30,6 +32,10 @@ public class Role {
     )
     private Set<Privilege> privileges = new HashSet<>();
 
+    // @EqualsAndHashCode.Exclude prevents 'collection evicted' when fetching
+    // @JsonBackReference marks the field as non-serializable
+
+    @JsonBackReference
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "role")
     private Set<User> users = new HashSet<>();

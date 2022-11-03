@@ -100,7 +100,7 @@ public class SessionSecurityConfig {
                     .loginPage("/login")
                     .loginProcessingUrl("/authenticate")
 
-                    // needs handlers, else it returns 404 and cookie in both cases
+                    // needs handlers, else it returns 404
                     .successHandler(successHandler)
                     .failureHandler(failureHandler)
 

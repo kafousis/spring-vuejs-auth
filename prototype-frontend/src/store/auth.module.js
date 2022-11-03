@@ -1,4 +1,5 @@
 import AuthService from '../services/auth.service';
+import router from "../router";
 
 const auth = {
 
@@ -15,6 +16,9 @@ const auth = {
 
 	// computed properties for stores
     getters: {
+        isAuthenticated(state) {
+            return state.user != null ? true : false
+        }
     },
 
     // methods that can change state data, only sychronous code
@@ -43,12 +47,12 @@ const auth = {
         },
         updateUser(state, user) {
             state.user = user
-        }
+        },
     },
 
     // methods that cannot change state data, asychronous code (e.g. api calls)
     // receive a context object which contains mutations, state, getters, actions
-    // dispach an action
+    // dispatch an action
     actions: {
         sessionLogin({ state, commit, dispatch }) {
             console.log("sessionLogin")
@@ -59,22 +63,22 @@ const auth = {
             })
                 .then( ()=> {
                     console.log('login successful')
-                    dispatch('getAuthenticatedUser', state.username)
+                    commit('loginSuccess');
+                    dispatch('getAuthenticatedUser')
                 }, error => {
                     commit("loginFailure", error)
                 });
         },
-        getAuthenticatedUser({ commit }, username) {
+        getAuthenticatedUser({ commit }) {
             console.log("getAuthenticatedUser")
-            
-            AuthService.getAuthenticatedUser(username)
+
+            AuthService.getAuthenticatedUser()
                 .then(response => {
-                    console.log(response.data)
+                    console.log("user retrieved")                    
                     commit("updateUser", response.data)
-                    commit('loginSuccess');
+                    router.push('/dashboard')
                 }, error => {
                     commit("loginFailure", error)
-
                 })
         },
     }
