@@ -105,6 +105,8 @@ public class SessionSecurityConfig {
                     .failureHandler(failureHandler)
 
                 .and()
+                .rememberMe().rememberMeParameter("remember-me")
+                .and()
 
                 .logout()
                     .logoutSuccessHandler(successHandler)

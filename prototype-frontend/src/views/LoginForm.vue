@@ -23,8 +23,8 @@
 
 			<div class="flex align-items-center justify-content-between mb-6">
 				<div class="flex align-items-center">
-					<Checkbox id="rememberme" class="mr-2" :binary="true" v-model="rememberMe"></Checkbox>
-					<label for="rememberme">Remember me</label>
+					<Checkbox id="remember-me" name="remember-me" class="mr-2" :binary="true" v-model="rememberMe"></Checkbox>
+					<label for="remember-me">Remember me</label>
 				</div>
 				<a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
 			</div>
