@@ -10,7 +10,6 @@ const auth = {
     state: {
 		username: 'admin',
         password: "admin",
-        rememberMe: false,
         errorMessage: null,
         user: null
     },
@@ -30,10 +29,6 @@ const auth = {
         updatePassword(state, password) {
             //console.log("updatePassword")
             state.password = password
-        },
-        updateRememeberMe(state, rememberMe) {
-            //console.log("updateRememeberMe")
-            state.rememberMe = rememberMe
         },
         loginSuccess(state) {
             console.log("loginSuccess")

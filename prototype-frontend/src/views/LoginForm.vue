@@ -21,11 +21,7 @@
 				<small id="password-error" class="p-error" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</small>
 			</div>
 
-			<div class="flex align-items-center justify-content-between mb-6">
-				<div class="flex align-items-center">
-					<Checkbox id="remember-me" name="remember-me" class="mr-2" :binary="true" v-model="rememberMe"></Checkbox>
-					<label for="remember-me">Remember me</label>
-				</div>
+			<div class="flex align-items-right justify-content-end mb-6">
 				<a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
 			</div>
 
