@@ -1,5 +1,6 @@
 import AuthService from '../services/auth.service';
 import router from "../router";
+import { LocalStorageService } from '@/services/local.storage.service';
 
 const auth = {
 
@@ -16,9 +17,6 @@ const auth = {
 
 	// computed properties for stores
     getters: {
-        isAuthenticated(state) {
-            return state.user != null ? true : false
-        }
     },
 
     // methods that can change state data, only sychronous code
@@ -48,6 +46,9 @@ const auth = {
         updateUser(state, user) {
             state.user = user
         },
+        saveUser(payload){
+            LocalStorageService.setAuthUserId(payload.user.id)
+        },
     },
 
     // methods that cannot change state data, asychronous code (e.g. api calls)
@@ -76,6 +77,7 @@ const auth = {
                 .then(response => {
                     console.log("user retrieved")                    
                     commit("updateUser", response.data)
+                    commit("saveUser", response.data)
                     router.push('/dashboard')
                 }, error => {
                     commit("loginFailure", error)

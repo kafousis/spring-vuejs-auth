@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginForm from '../views/LoginForm.vue';
 import Dashboard from '../views/Dashboard.vue'
-import store from '../store'
+
+import { LocalStorageService } from '../services/local.storage.service';
 
 const routes = [
 	{
@@ -47,7 +48,7 @@ router.beforeEach((to, from, next) => {
     // console.log(to);
     // console.log(from);
 
-    var authenticated = store.getters['auth/isAuthenticated']
+    var authenticated = LocalStorageService.getAuthUserId()
 
     if (to.matched.some(record => record.meta.requiresAuth)) {
 

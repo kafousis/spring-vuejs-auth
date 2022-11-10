@@ -13,8 +13,6 @@ class AuthService {
         return axios.post('authenticate', bodyFormData, headers)
     }
 
-    jwtTokenLogin(creds) { return axios.post('login', creds) }
-
     getAuthenticatedUser() { return axios.get('api/me') }
 
 }
