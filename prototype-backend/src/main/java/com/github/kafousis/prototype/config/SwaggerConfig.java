@@ -17,9 +17,6 @@ public class SwaggerConfig {
     // default-ui-url = http://localhost:8080/swagger-ui/index.html
     // custom-ui-url = http://localhost:8080/swagger-ui
 
-    // https://www.baeldung.com/openapi-jwt-authentication
-    // https://springdoc.org/
-
     @Bean
     public OpenAPI openAPI() {
 

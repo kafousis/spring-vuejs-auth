@@ -1,5 +1,6 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  publicPath: process.env.NODE_ENV === 'production' ? '/spring-vuejs-prototype' : '/',
-  transpileDependencies: true,
-})
+module.exports = {
+   //publicPath: process.env.NODE_ENV === 'production' ? '/spring-vuejs-prototype' : '/',
+   // publicPath: '/spring-vuejs-prototype',
+   publicPath: '/',
+   outputDir: 'build/dist/public'
+}

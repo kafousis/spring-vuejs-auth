@@ -2,7 +2,7 @@
 <div class="flex justify-content-center">
 	<div class="surface-card p-4 shadow-2 border-round w-full lg:w-4 md:w-6 sm:w-8">
 		<div class="text-center mb-5">
-			<img src="images/logo.svg" alt="Image" height="50" class="mb-3">
+			<img src="img/logo.svg" alt="Image" height="100" class="mb-3">
 			<div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
 		</div>
 

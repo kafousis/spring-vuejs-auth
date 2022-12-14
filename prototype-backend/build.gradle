@@ -8,15 +8,25 @@ plugins {
 group = 'com.github.kafousis'
 version = '0.0.1-SNAPSHOT'
 
+repositories {
+	mavenCentral()
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
 }
 
-repositories {
-	mavenCentral()
+sourceSets {
+	main {
+		resources {
+			srcDir '../prototype-frontend/build/dist'
+		}
+	}
 }
+
+processResources.dependsOn ':prototype-frontend:npmBuild'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -31,7 +41,6 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 //	runtimeOnly 'org.postgresql:postgresql'
-	runtimeOnly project(':prototype-frontend')
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -42,23 +51,7 @@ java {
 	targetCompatibility = JavaVersion.VERSION_11
 }
 
-clean {
-	doFirst {
-		delete "$buildDir/"
-		delete project(':prototype-frontend').file('dist/').getAbsolutePath()
-		delete rootProject.file('build/').getAbsolutePath()
-	}
-}
-
-bootRun { }
-
 bootWar {
-	// creates a build directory with a production build
-	dependsOn ':prototype-frontend:npm_run_build'
-
-	// contents of 'webAppDirName' are copied to WAR root folder
-	webAppDirName = project(':prototype-frontend').file('dist/')
-
 	// result WAR file
 	destinationDirectory = rootProject.file('build/')
 	archiveFileName = 'spring-vuejs-prototype.war'
