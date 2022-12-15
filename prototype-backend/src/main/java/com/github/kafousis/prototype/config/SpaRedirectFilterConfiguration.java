@@ -13,11 +13,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 @Configuration
 public class SpaRedirectFilterConfiguration {
     private final Logger LOGGER = LoggerFactory.getLogger(SpaRedirectFilterConfiguration.class);
+
+    private final String[] REDIRECT_IGNORE_PATHS = {
+            "/img", "/css", "/js", "/fonts", "/favicon.ico",
+            "/h2-console", "/csrf/token", "/api",
+            "/swagger-ui", "/v3/api-docs"
+    };
 
     @Bean
     public FilterRegistrationBean spaRedirectFiler() {
@@ -31,19 +38,18 @@ public class SpaRedirectFilterConfiguration {
 
     private OncePerRequestFilter createRedirectFilter() {
         return new OncePerRequestFilter() {
-            // Forwards all routes except '/images/**', '/css/**', '/js/**', '/fonts/**', '/index.html', '/favicon.ico', '/csrf/**', '/api/**'
-            private final String REGEX = "(?!/img|/css|/js|/fonts/|/index\\.html|/favicon\\.ico|/h2-console|/csrf|/swagger-ui|/v3/api-docs|/api).*$";
-            private Pattern pattern = Pattern.compile(REGEX);
+
             @Override
             protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
-                if (pattern.matcher(req.getRequestURI()).matches() && !req.getRequestURI().equals("/")) {
-                    // Delegate/Forward to `/` if `pattern` matches and it is not `/`
-                    // Required because of 'mode: history'usage in frontend routing, see README for further details
+
+                if (Arrays.stream(REDIRECT_IGNORE_PATHS).anyMatch(req.getRequestURI()::contains)){
+                    chain.doFilter(req, res);
+                }else{
+                    // if the request path is not included in REDIRECT_IGNORE_PATHS
+                    // redirect to root, so the VueJS router can resolve the view
                     LOGGER.info("URL {} entered directly into the Browser, redirecting...", req.getRequestURI());
                     RequestDispatcher rd = req.getRequestDispatcher("/");
                     rd.forward(req, res);
-                } else {
-                    chain.doFilter(req, res);
                 }
             }
         };

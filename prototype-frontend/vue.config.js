@@ -1,6 +1,4 @@
 module.exports = {
-   //publicPath: process.env.NODE_ENV === 'production' ? '/spring-vuejs-prototype' : '/',
-   // publicPath: '/spring-vuejs-prototype',
-   publicPath: '/',
+   publicPath: '/spring-vuejs-prototype',
    outputDir: 'build/dist/public'
 }

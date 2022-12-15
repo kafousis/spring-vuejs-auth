@@ -58,12 +58,7 @@ export default {
 		}
 	},
 	mounted() {
-		AuthService.getCsrfToken()
-			.then(response => {
-				console.log('Initial csrf token: ' + response.data.token);
-			}, error => {
-				console.log(error);
-			});
+		AuthService.getCsrfToken();
 	},
 	computed: {
 		username: {
