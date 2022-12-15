@@ -7,17 +7,12 @@ A prototype, implemented with Spring Boot and Vue.js.
 
 The frontend is built with:
 - node v16.18.0
-- vue/cli@5.0.8
-- npm@8.19.2
+- vue/cli v5.0.8
+- npm v8.19.2
 
-### Backend
+### Run application with single command
 ```shell
 ./gradlew bootRun
-./gradlew bootWar
 ```
 
-### Frontend
-```shell
-npm install
-npm run serve
-```
+> The applicaton is available at http://localhost:8080/spring-vuejs-prototype
