@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.github.kafousis.prototype.enums.PrivilegeCategory;
 import lombok.*;
 import lombok.experimental.Accessors;
-import net.minidev.json.annotate.JsonIgnore;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 

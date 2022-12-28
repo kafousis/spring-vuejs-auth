@@ -69,7 +69,7 @@ public class SecurityConfig {
                 // store the CSRF token in a cookie with name XSRF-TOKEN
                 .csrf()
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .ignoringAntMatchers("/h2-console/**")
+                    .ignoringRequestMatchers("/h2-console/**")
 
                 .and()
                 // Spring Security disables rendering within an iframe because it can cause security issues
@@ -79,8 +79,8 @@ public class SecurityConfig {
 
                 .and()
 
-                .authorizeRequests()
-                    .antMatchers(AUTH_WHITELIST).permitAll()
+                .authorizeHttpRequests()
+                    .requestMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
 
                 .and()

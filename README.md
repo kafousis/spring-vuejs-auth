@@ -15,4 +15,4 @@ The frontend is built with:
 ./gradlew bootRun
 ```
 
-> The applicaton is available at http://localhost:8080/spring-vuejs-prototype
+> The application is available at http://localhost:8080/spring-vuejs-prototype

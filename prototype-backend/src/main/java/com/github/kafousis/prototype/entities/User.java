@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity @Table(name = "users")
+@Entity
+@Table(name = "users")
 @Getter @Setter @NoArgsConstructor
 @EqualsAndHashCode @ToString @Accessors(chain = true)
 @SequenceGenerator(name = "user_generator", sequenceName = "user_id_seq", allocationSize = 1)
