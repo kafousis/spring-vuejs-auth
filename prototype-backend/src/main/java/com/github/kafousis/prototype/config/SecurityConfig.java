@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -69,7 +70,7 @@ public class SecurityConfig {
                 // store the CSRF token in a cookie with name XSRF-TOKEN
                 .csrf()
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .ignoringRequestMatchers("/h2-console/**")
+                    .ignoringAntMatchers(("/h2-console/**"))
 
                 .and()
                 // Spring Security disables rendering within an iframe because it can cause security issues
@@ -80,7 +81,8 @@ public class SecurityConfig {
                 .and()
 
                 .authorizeHttpRequests()
-                    .requestMatchers(AUTH_WHITELIST).permitAll()
+                    .antMatchers(AUTH_WHITELIST).permitAll()
+                    //.requestMatchers(new AntPathRequestMatcher("/openapi/openapi.yml")).permitAll()
                 .anyRequest().authenticated()
 
                 .and()
