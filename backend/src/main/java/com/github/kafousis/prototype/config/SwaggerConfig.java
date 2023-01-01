@@ -21,7 +21,7 @@ public class SwaggerConfig {
     public OpenAPI openAPI() {
 
         return new OpenAPI()
-                .info(new Info().title("Spring - Vue.js Prototype")
+                .info(new Info().title("Spring - Vue.js Auth")
                         .contact(new Contact().name("Giannis Kafousis").email("g.kafousis@gmail.com").url("https://www.linkedin.com/in/gkafousis/")));
     }
 }

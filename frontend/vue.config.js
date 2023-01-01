@@ -1,4 +1,4 @@
 module.exports = {
-   publicPath: '/spring-vuejs-prototype',
+   publicPath: '/spring-vuejs-auth',
    outputDir: 'build/dist/public'
 }

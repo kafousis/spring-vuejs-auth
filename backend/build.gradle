@@ -21,12 +21,12 @@ configurations {
 sourceSets {
 	main {
 		resources {
-			srcDir '../prototype-frontend/build/dist'
+			srcDir '../frontend/build/dist'
 		}
 	}
 }
 
-processResources.dependsOn ':prototype-frontend:npmBuild'
+processResources.dependsOn ':frontend:npmBuild'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -55,7 +55,7 @@ java {
 bootWar {
 	// result WAR file
 	destinationDirectory = rootProject.file('build/')
-	archiveFileName = 'spring-vuejs-prototype.war'
+	archiveFileName = 'spring-vuejs-auth.war'
 }
 
 tasks.named('test') {

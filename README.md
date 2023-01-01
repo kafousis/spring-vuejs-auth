@@ -1,5 +1,5 @@
-# Spring - Vue.js Prototype
-A prototype, implemented with Spring Boot and Vue.js.
+# Spring - Vue.js Authentication
+Authentication implemented with Spring Boot and Vue.js.
 
 ### The project has two modules
 - Spring backend
@@ -15,4 +15,4 @@ The frontend is built with:
 ./gradlew bootRun
 ```
 
-> The application is available at http://localhost:8080/spring-vuejs-prototype
+> The application is available at http://localhost:8080/spring-vuejs-auth

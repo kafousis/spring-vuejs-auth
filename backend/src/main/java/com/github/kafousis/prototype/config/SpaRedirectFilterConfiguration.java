@@ -42,6 +42,7 @@ public class SpaRedirectFilterConfiguration {
             protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
 
                 if (Arrays.stream(REDIRECT_IGNORE_PATHS).anyMatch(req.getRequestURI()::contains)){
+                    LOGGER.info("NOT REDIRECTING "+req.getRequestURI());
                     chain.doFilter(req, res);
                 }else{
                     // if the request path is not included in REDIRECT_IGNORE_PATHS

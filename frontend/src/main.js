@@ -13,7 +13,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8080/spring-vuejs-prototype';
+axios.defaults.baseURL = 'http://localhost:8080/spring-vuejs-auth';
 
 // indicates whether or not requests should be made using credentials 
 // such as cookies, authorization headers or TLS client certificates
